@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { IsEmail } from 'class-validator';
 import { IsString } from 'class-validator';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User {
@@ -20,6 +21,7 @@ export class User {
 
   @Column()
   @IsString()
+  @Exclude()
   password: string;
 
   @AfterInsert()

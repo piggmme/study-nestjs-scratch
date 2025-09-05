@@ -8,6 +8,8 @@ import {
   Query,
   Patch,
   NotFoundException,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
@@ -23,6 +25,7 @@ export class UsersController {
   }
 
   @Get('/:id')
+  @UseInterceptors(ClassSerializerInterceptor)
   async findUser(@Param('id') id: string) {
     // id는 항상 string임 (ex. '/1234' => id is string)
     const user = await this.usersService.findOne(parseInt(id));
