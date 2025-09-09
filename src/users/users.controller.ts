@@ -14,6 +14,7 @@ import {
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { SerializeInterceptor } from '../interceptors/serialize.interceptor';
 
 @Controller('auth')
 export class UsersController {
@@ -25,9 +26,10 @@ export class UsersController {
   }
 
   @Get('/:id')
-  @UseInterceptors(ClassSerializerInterceptor)
+  @UseInterceptors(SerializeInterceptor)
   async findUser(@Param('id') id: string) {
     // id는 항상 string임 (ex. '/1234' => id is string)
+    console.log('2. handler is running');
     const user = await this.usersService.findOne(parseInt(id));
     if (!user) {
       throw new NotFoundException('User not found');
