@@ -16,6 +16,7 @@ import { Serialize } from '../interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
 
 @Controller('auth')
+@Serialize(UserDto)
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
@@ -25,7 +26,6 @@ export class UsersController {
   }
 
   @Get('/:id')
-  @Serialize(UserDto)
   async findUser(@Param('id') id: string) {
     // id는 항상 string임 (ex. '/1234' => id is string)
     console.log('2. handler is running');
