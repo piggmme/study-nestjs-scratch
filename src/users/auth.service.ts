@@ -43,10 +43,10 @@ export class AuthService {
       throw new NotFoundException('user not found');
     }
 
-    const [salt, hash] = user.password.split('.');
-    const result = (await scrypt(password, salt, 32)) as Buffer;
+    const [salt, storedHash] = user.password.split('.');
+    const hash = (await scrypt(password, salt, 32)) as Buffer;
 
-    if (hash !== result.toString('hex')) {
+    if (storedHash !== hash.toString('hex')) {
       throw new BadRequestException('bad password');
     }
 
