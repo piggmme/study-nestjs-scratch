@@ -19,6 +19,11 @@ Content-Type: application/json
   "password": "123456"
 }
 
+### Get current user
+GET http://localhost:3000/auth/whoami
+
+### Sign out
+POST http://localhost:3000/auth/signout
 
 ### Find a particular user with id
 GET http://localhost:3000/auth/1
