@@ -6,12 +6,11 @@ import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 describe('AuthService', () => {
   let service: AuthService;
-  let fakeUsersService: Partial<UsersService>;
 
   beforeEach(async () => {
     // Create a fake copy of the users service
     const users: User[] = [];
-    fakeUsersService = {
+    const fakeUsersService = {
       find: (email: string) => {
         const filteredUsers = users.filter((user) => user.email === email);
         return Promise.resolve(filteredUsers);
