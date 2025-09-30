@@ -5,9 +5,11 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
+  OneToMany,
 } from 'typeorm';
 import { IsEmail } from 'class-validator';
 import { IsString } from 'class-validator';
+import { Report } from '../reports/report.entity';
 
 @Entity()
 export class User {
@@ -21,6 +23,9 @@ export class User {
   @Column()
   @IsString()
   password: string;
+
+  @OneToMany(() => Report, (report) => report.user)
+  reports: Report[];
 
   @AfterInsert()
   logInsert() {
