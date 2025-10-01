@@ -24,6 +24,9 @@ export class User {
   @IsString()
   password: string;
 
+  @Column({ default: true })
+  admin: boolean;
+
   // 함수를 반환하는 이유는 순환 의존성 때문임
   // 순환 의존성이 있으면 타입스크립트가 컴파일 에러를 발생시킴
   // 그래서 함수를 반환하여 순환 의존성을 해결함
