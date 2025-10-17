@@ -24,6 +24,9 @@ const cookieSession = require('cookie-session');
           type: 'sqlite',
           database: config.get<string>('DB_NAME'),
           entities: [User, Report],
+          // synchronize는 typeORM이 데이터베이스와 동기화를 할 때 사용하는 옵션
+          // Entity에서 프로퍼티 제거시 데이터베이스에서 실제 데이터를 삭제하기 때문에 매우 위험하다
+          // 따라서 배포 환경에서는 반드시 false로 설정해야 한다.
           synchronize: true,
         };
       },
